@@ -24,7 +24,7 @@ def datasetAn(user):
 # def replace(pot,date,value):
 #     data.loc[pot, date] = value
 #     return data
-#deneme
+#denemeler
 
 def deneme():
     pass
