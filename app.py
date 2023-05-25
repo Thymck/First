@@ -1,4 +1,4 @@
-from deneme import chard,clover, dataset,datasetAn,replace,display,null,delete,add,Mono,Pre,Same
+from functions import chard,clover, dataset,datasetAn,replace,display,null,delete,add,Mono,Pre,Same
 
 
 class Program:
