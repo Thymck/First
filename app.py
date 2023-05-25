@@ -1,9 +1,8 @@
-from deneme import chard,clover, dataset,datasetAn,replace,display,null,delete
+from deneme import chard,clover, dataset,datasetAn,replace,display,null,delete,add,Mono,Pre,Same
 
 
 class Program:
-    def __init__(self,ad):
-        self.ad=ad
+    def __init__(self):
         self.app=True
         self.crop_name = None
         self.crop_data = None
@@ -58,13 +57,15 @@ class Program:
             if(user==2):
                 self.selectedDataAnaly()    
             if(user==3): ## Add a data to dataset    
-              pass 
+              self.adddata()
             if(user==4): ## Delete a data to dataset    
               self.deleteData()
             if(user==5): ## Update a data to dataset    
               self.replaceData()
             if(user==6):
                self.nulldata()  
+            if(user==7):
+               self.treatments()   
             if(user==8):
                break  
             if(user==9):
@@ -74,6 +75,15 @@ class Program:
     def selectedDataAnaly(self):
         print(f"Information of data for {self.crop_name} \n")
         print(datasetAn(self.crop_name))
+    def adddata(self):
+       pass
+        # put=int(input("Pot"))   
+        # treat=input("Treatment")
+        # crop=input(self.crop_name)
+        # date=input("date")
+        # value= float(input("Value"))
+       # print(add(26, 'Pre', 'Chard','08Sep2022', 16.5))
+      
     def replaceData(self):
         while True:
           try:  
@@ -95,31 +105,55 @@ class Program:
           break
     def nulldata(self):
        print(null(self.crop_name),f" \n Data set {self.crop_data}")   
+    def treatments(self):
+         while True:
+          print(f"\nWhich treatment of {self.crop_name} would you like to see?")
+          print("1 - Mono")
+          print("2 - Same")
+          print("3 - Pre")
+          print("4 - Exit")
+          print("5 - Upper Menü")
+
+          try:
+            user_input = int(input("User input : ")) ## user input 
+          except:
+             print("Try again")
+             continue
+          if(user_input==1):
+             print(Mono(self.crop_name))
+          if(user_input==2):
+             print(Same(self.crop_name))
+          if(user_input==3):
+             print(Pre(self.crop_name))
+          if(user_input==4):
+             exit()
+          if(user_input==5):
+             break
+             
     def deleteData(self):
+          tryInput=0
           while True:
            try:  
             potnot=int(input("Pot no"))
            except ValueError:
-            print("Please Enter a intger No")  
+            print("Please Enter a intger No : ")  
+            tryInput+=1
+            if(tryInput==3):
+              print("Plese think again and come back")
+              break
             continue 
-        
            date = input("Date: ")
            if date not in ("08Sep2022", "18Sep2022", "28Sep2022", "08Oct2022"):
-                 print("Please enter a valid date")
-                 continue
+              print("Please enter a valid date \n input must be one of this :\n 08Sep2022 ,  18Sep2022, 28Sep2022, 08Oct2022")
+              continue
+                 
            delete(potnot,date)
            break
     def exit(self):
         exit()    
+
                 
-
-
-
-
-
-
-
-deneme = Program("sen")
+deneme = Program()
 
 while deneme.app:
  deneme.hadi()   
