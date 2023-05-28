@@ -1,4 +1,4 @@
-from functions import chard,clover, dataset,datasetAn,replace,display,null,delete,add,Mono,Pre,Same
+from functions import chard,clover, dataset,datasetAn,replace,display,null,delete,add,Mono,Pre,Same, potNoCheck
 
 
 class Program:
@@ -70,12 +70,12 @@ class Program:
                break  
             if(user==9):
                 self.exit()
-    def selectedData(self):
+    def selectedData(self): ## To show the database of selected crop
         print(dataset(self.crop_name))
-    def selectedDataAnaly(self):
+    def selectedDataAnaly(self): ## To Show the data analays of selected crop
         print(f"Information of data for {self.crop_name} \n")
         print(datasetAn(self.crop_name))
-    def adddata(self):
+    def adddata(self): ## To Add a data to selected dataset of crop
        pass
         # put=int(input("Pot"))   
         # treat=input("Treatment")
@@ -84,18 +84,23 @@ class Program:
         # value= float(input("Value"))
        # print(add(26, 'Pre', 'Chard','08Sep2022', 16.5))
       
-    def replaceData(self):
+    def replaceData(self): ## To update or replace the data from selected crop dataset
         while True:
           try:  
-            potnot=int(input("Pot no"))
+            print(dataset(self.crop_name))
+            potnot=int(input("Pot no")) 
+            result = potNoCheck(self.crop_name, potnot)
+            if potnot not in result:
+             print(f"Please try again this pot not exist in the data set of {self.crop_name}")
+             break
           except ValueError:
             print("Please Enter a intger No")  
             continue 
         
           date = input("Date: ")
           if date not in ("08Sep2022", "18Sep2022", "28Sep2022", "08Oct2022"):
-                 print("Please enter a valid date")
-                 continue
+                 print("Please enter a valid date \n Valid options are : 08Sep2022", "18Sep2022", "28Sep2022", "08Oct2022")
+                 break
           try:  
             value=float(input("Deger"))
           except ValueError:
@@ -103,9 +108,9 @@ class Program:
             continue    
           print(replace(potnot,date,value))
           break
-    def nulldata(self):
+    def nulldata(self): ## See the null data of selected crop
        print(null(self.crop_name),f" \n Data set {self.crop_data}")   
-    def treatments(self):
+    def treatments(self):  ## To see the other treatment of selected crop
          while True:
           print(f"\nWhich treatment of {self.crop_name} would you like to see?")
           print("1 - Mono")
@@ -130,22 +135,22 @@ class Program:
           if(user_input==5):
              break
              
-    def deleteData(self):
-          tryInput=0
+    def deleteData(self):  #Delete a data from selected crop dataset
+          print(dataset(self.crop_name))
           while True:
            try:  
             potnot=int(input("Pot no"))
+            result = potNoCheck(self.crop_name, potnot)
+            if potnot not in result:
+             print(f"Please try again this pot no not exsist on the dataset of {self.crop_name} ")
+             break
            except ValueError:
             print("Please Enter a intger No : ")  
-            tryInput+=1
-            if(tryInput==3):
-              print("Plese think again and come back")
-              break
             continue 
            date = input("Date: ")
            if date not in ("08Sep2022", "18Sep2022", "28Sep2022", "08Oct2022"):
               print("Please enter a valid date \n input must be one of this :\n 08Sep2022 ,  18Sep2022, 28Sep2022, 08Oct2022")
-              continue
+              break
                  
            delete(potnot,date)
            break

@@ -53,24 +53,27 @@ def add(pot, treatment, crop, date, value):
 ##Replace
 def replace(pot,date,value):
     data=dataRead()
-    validpotno = list(range(len(data)+1))
-    if pot in validpotno:
-        data.loc[pot, date] = value
-        data.to_csv("/Users/tahayasinmucak/Desktop/Yazilim1/Deneme/Python/MasterStudy/modified_dataset.csv", index=False)
-        return dataRead()
-    else:
-        print("No way man")
+    data.loc[pot-1, date] = value
+    data.to_csv("/Users/tahayasinmucak/Desktop/Yazilim1/Deneme/Python/MasterStudy/modified_dataset.csv", index=False)
+    return dataRead()
+
 
  ## Delete Data from database 
-def delete(pot,date):
+def delete(pot, date):
     data = dataRead()
-    validpot = list(range(len(data)+1))
-    if pot in validpot:
-        data.loc[pot,date]=None
-        data.to_csv("/Users/tahayasinmucak/Desktop/Yazilim1/Deneme/Python/MasterStudy/modified_dataset.csv", index=False)
-        return  dataRead()
-    else:
-        print("The Pot number that you enter is not valid")
+    data.loc[pot - 1, date] = None
+    data.to_csv("/Users/tahayasinmucak/Desktop/Yazilim1/Deneme/Python/MasterStudy/modified_dataset.csv", index=False)
+    return dataRead()
+
+def potNoCheck(crop,pot):
+    data=dataRead()
+    data=data[data["Crop"]==crop]["Pot"]
+    liste=[]
+    for i in data:
+        liste.append(i)
+    return liste
+
+
 
 
 ##Nulldata
